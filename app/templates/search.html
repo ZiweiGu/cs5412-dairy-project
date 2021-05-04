@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/main.css">
+        <style type="text/css">
+
+            .wood-text {
+                    background: url('/static/gradient_1.jpg');
+                    background-size: cover;
+                    position: relative;
+                    font-size: 30px;
+                    text-transform: uppercase;
+                    font-family:Futura;
+                    background-clip: text;
+                    -webkit-background-clip: text;
+                    color: transparent;
+                    &:after {
+                      $stroke-width: $extra-large * 0.05;
+                      content: $random-text;
+                      position: absolute;
+                      -webkit-text-stroke-width: $stroke-width;
+                      -webkit-text-stroke-color: rgba(black, 0.6);
+                      left: 2px;
+                      top: 2px
+                    }
+                  }
+
+        </style>
+    </head>
+    <body>
+        <div class="topcorner">
+            <p>Project: {{ name }}</p>
+            <p>Students: ({{ netid }})</p>
+        </div>
+        <form class="form-inline global-search">
+            
+            <div class='wood-text'>Estrus and Pregnancy Prediction</div>
+            <br><br>
+            
+            <div class="form-group">
+                <input id="input" type="text" name="search" class="form-control" placeholder="Your Input">
+            </div>
+            <button type="submit" class="btn btn-info"> Go! </button>
+        </form>
+        <form class="form-inline global-search">
+        {% if data %}
+            <h1>{{output_message}}</h1>
+            {% for d in data %}  
+                <br>
+                <p>{{d}}</p>
+            {% endfor %}
+        {% endif %}
+        </form>
+    </body>
+
+</html>
