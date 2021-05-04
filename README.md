@@ -19,3 +19,24 @@ Estrus and Pregnancy Prediction CS 5412 Final Project
 
 ## Final Deliverables
 We will demo our data management and analytics system on a public hosted **web dashboard** where users can **monitor continuous streams of IoT data**, and **view real-time predictions and other insights**.
+
+
+## Get Started
+```bash
+git clone https://github.com/ZiweiGu/cs5412-dairy-project.git
+cd cs5412-dairy-project
+# # Create a new python3 virtualenv named venv.
+virtualenv -p python3 venv 
+# Activate venv
+source venv/bin/activate
+# Install all requirements
+pip install -r requirements.txt
+# Set environment
+source .env
+# Run the app in localhost!
+python3 app.py
+# Push to heroku (after changes are made)
+heroku update
+heroku auth:login
+git push heroku main
+```
