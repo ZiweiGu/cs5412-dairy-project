@@ -1,8 +1,113 @@
-<html>
+<html lang='en'>
     <head>
-        <link rel="stylesheet" href="/static/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/main.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>Dashboard</title>
+
         <style type="text/css">
+
+            body {
+              font-size: .875rem;
+            }
+
+            .feather {
+              width: 16px;
+              height: 16px;
+              vertical-align: text-bottom;
+            }
+
+            /*
+             * Sidebar
+             */
+
+            .sidebar {
+              position: fixed;
+              top: 0;
+              /* rtl:raw:
+              right: 0;
+              */
+              bottom: 0;
+              /* rtl:remove */
+              left: 0;
+              z-index: 100; /* Behind the navbar */
+              padding: 48px 0 0; /* Height of navbar */
+              box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            }
+
+            @media (max-width: 767.98px) {
+              .sidebar {
+                top: 5rem;
+              }
+            }
+
+            .sidebar-sticky {
+              position: relative;
+              top: 0;
+              height: calc(100vh - 48px);
+              padding-top: .5rem;
+              overflow-x: hidden;
+              overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+            }
+
+            .sidebar .nav-link {
+              font-weight: 500;
+              color: #333;
+            }
+
+            .sidebar .nav-link .feather {
+              margin-right: 4px;
+              color: #727272;
+            }
+
+            .sidebar .nav-link.active {
+              color: #007bff;
+            }
+
+            .sidebar .nav-link:hover .feather,
+            .sidebar .nav-link.active .feather {
+              color: inherit;
+            }
+
+            .sidebar-heading {
+              font-size: .75rem;
+              text-transform: uppercase;
+            }
+
+            /*
+             * Navbar
+             */
+
+            .navbar-brand {
+              padding-top: .75rem;
+              padding-bottom: .75rem;
+              font-size: 1rem;
+              background-color: rgba(0, 0, 0, .25);
+              box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+            }
+
+            .navbar .navbar-toggler {
+              top: .25rem;
+              right: 1rem;
+            }
+
+            .navbar .form-control {
+              padding: .75rem 1rem;
+              border-width: 0;
+              border-radius: 0;
+            }
+
+            .form-control-dark {
+              color: #fff;
+              background-color: rgba(255, 255, 255, .1);
+              border-color: rgba(255, 255, 255, .1);
+            }
+
+            .form-control-dark:focus {
+              border-color: transparent;
+              box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+            }
 
             .wood-text {
                     background: url('/static/gradient_1.jpg');
@@ -27,30 +132,140 @@
 
         </style>
     </head>
+
     <body>
-        <div class="topcorner">
+<!--         <div class="topcorner">
             <p>Project: {{ name }}</p>
             <p>Students: ({{ netid }})</p>
-        </div>
-        <form class="form-inline global-search">
-            
-            <div class='wood-text'>Estrus and Pregnancy Prediction</div>
-            <br><br>
-            
-            <div class="form-group">
-                <input id="input" type="text" name="search" class="form-control" placeholder="Your Input">
-            </div>
-            <button type="submit" class="btn btn-info"> Go! </button>
-        </form>
-        <form class="form-inline global-search">
-        {% if data %}
-            <h1>{{output_message}}</h1>
+        </div> -->
+        <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Estrus and Pregnancy Prediction</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+</header>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+      </div>
+
+<!--       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
+<div id="container" style="height: 400px; min-width: 900px"></div>
+
+      <h2>Real-Time Sensor Data</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>cow ID</th>
+              <th>col_1</th>
+              <th>col_2</th>
+              <th>col_3</th>
+              <th>col_4</th>
+            </tr>
+          </thead>
+
+            {% if data %}
+            <tbody>
             {% for d in data %}  
-                <br>
-                <p>{{d}}</p>
+              <tr>
+              <td>{{d['id']}}</td>
+              <td>{{d['col_1']}}</td>
+              <td>{{d['col_2']}}</td>
+              <td>{{d['col_3']}}</td>
+              <td>{{d['col_4']}}</td>
+              </tr>
             {% endfor %}
-        {% endif %}
-        </form>
+            </tbody>
+            {% endif %}
+          <tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+
+
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+        <script type="text/javascript">
+            
+            // Create the chart
+Highcharts.stockChart('container', {
+  chart: {
+    events: {
+      load: function () {
+
+        // set up the updating of the chart each second
+        var series = this.series[0];
+        setInterval(function () {
+          var x = (new Date()).getTime(), // current time
+            y = Math.round(Math.random() * 100);
+          series.addPoint([x, y], true, true);
+        }, 1000);
+      }
+    }
+  },
+
+  time: {
+    useUTC: false
+  },
+
+  rangeSelector: {
+    buttons: [{
+      count: 1,
+      type: 'minute',
+      text: '1M'
+    }, {
+      count: 5,
+      type: 'minute',
+      text: '5M'
+    }, {
+      type: 'all',
+      text: 'All'
+    }],
+    inputEnabled: false,
+    selected: 0
+  },
+
+  title: {
+    text: 'Live random data'
+  },
+
+  exporting: {
+    enabled: false
+  },
+
+  series: [{
+    name: 'Random data',
+    data: (function () {
+      // generate an array of random data
+      var data = [],
+        time = (new Date()).getTime(),
+        i;
+
+      for (i = -999; i <= 0; i += 1) {
+        data.push([
+          time + i * 1000,
+          Math.round(Math.random() * 100)
+        ]);
+      }
+      return data;
+    }())
+  }]
+});
+        </script>
+
+
+<!--     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
     </body>
 
 </html>
