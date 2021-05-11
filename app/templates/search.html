@@ -157,16 +157,23 @@
 <!--       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
 <div id="container" style="height: 400px; min-width: 900px"></div>
 
-      <h2>Real-Time Sensor Data</h2>
+      <h2>Preprocessed Heat Alerts</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th>cow ID</th>
-              <th>col_1</th>
-              <th>col_2</th>
-              <th>col_3</th>
-              <th>col_4</th>
+              <th>Cow ID</th>
+              <th>heat_DATE</th>
+              <th>DIMatheat</th>
+              <th>SB_HTSTARTS</th>
+              <th>SB_HTENDS</th>
+              <th>SB_PROB</th>
+              <th>BCODE</th>
+              <th>DC_ACLEV</th>
+              <th>DC_ACDAT</th>
+              <th>DC_ACTIM</th>
+              <th><b>Outcome</b></th>
+
             </tr>
           </thead>
 
@@ -174,11 +181,17 @@
             <tbody>
             {% for d in data %}  
               <tr>
-              <td>{{d['id']}}</td>
-              <td>{{d['col_1']}}</td>
-              <td>{{d['col_2']}}</td>
-              <td>{{d['col_3']}}</td>
-              <td>{{d['col_4']}}</td>
+              <td>{{d['ID']}}</td>
+              <td>{{d['heat_DATE']}}</td>
+              <td>{{d['DIMatheat']}}</td>
+              <td>{{d['SB_HTSTARTS']}}</td>
+              <td>{{d['SB_HTENDS']}}</td>
+              <td>{{d['SB_PROB']}}</td>
+              <td>{{d['BCODE']}}</td>
+              <td>{{d['DC_ACLEV']}}</td>
+              <td>{{d['DC_ACDAT']}}</td>
+              <td>{{d['DC_ACTIM']}}</td>
+              <td><b>{{d['outcome']}}</b></td>
               </tr>
             {% endfor %}
             </tbody>
@@ -235,7 +248,7 @@ Highcharts.stockChart('container', {
   },
 
   title: {
-    text: 'Live random data'
+    text: 'Real-Time Sensor Data'
   },
 
   exporting: {
