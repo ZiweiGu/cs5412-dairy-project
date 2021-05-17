@@ -362,11 +362,29 @@ Highcharts.stockChart('container', {
       load: function () {
 
         // set up the updating of the chart each second
-        var series = this.series[0];
+        var series_lie = this.series[0];
+        var series_stand = this.series[1];
+        var series_walk = this.series[2];
         setInterval(function () {
-          var x = (new Date()).getTime(), // current time
-            y = Math.round(Math.random() * 100);
-          series.addPoint([x, y], true, true);
+          fetch("https://dairy-project.azurewebsites.net/api/sensor-data", {
+            method: "GET",
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data)
+            const { results } = data;
+            for (var i=0; i<results.length; i++) {
+              console.log(results[i].lie)
+            } // TODO: handle multiple devices
+            var x = (new Date()).getTime(); // current time
+            series_lie.addPoint([x, parseInt(results[0].lie)], true, true);
+            series_stand.addPoint([x, parseInt(results[0].stand)], true, true);
+            series_walk.addPoint([x, parseInt(results[0].walk)], true, true);
+
+          }).catch(err => console.log(err))
+          // var x = (new Date()).getTime(), // current time
+          //   y = Math.round(Math.random() * 100);
+          // series.addPoint([x, y], true, true);
         }, 1000);
       }
     }
@@ -402,7 +420,41 @@ Highcharts.stockChart('container', {
   },
 
   series: [{
-    name: 'Random data',
+    name: 'Lie',
+    data: (function () {
+      // generate an array of random data
+      var data = [],
+        time = (new Date()).getTime(),
+        i;
+
+      for (i = -999; i <= 0; i += 1) {
+        data.push([
+          time + i * 1000,
+          Math.round(Math.random() * 100)
+        ]);
+      }
+      return data;
+    }())
+  },
+  {
+    name: 'Stand',
+    data: (function () {
+      // generate an array of random data
+      var data = [],
+        time = (new Date()).getTime(),
+        i;
+
+      for (i = -999; i <= 0; i += 1) {
+        data.push([
+          time + i * 1000,
+          Math.round(Math.random() * 100)
+        ]);
+      }
+      return data;
+    }())
+  },
+  {
+    name: 'Walk',
     data: (function () {
       // generate an array of random data
       var data = [],
@@ -418,7 +470,7 @@ Highcharts.stockChart('container', {
       return data;
     }())
   }]
-});
+  });
         </script>
 
 
