@@ -270,9 +270,9 @@
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
   </div> -->
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div id="submitt" class="btn btn-primary" onclick="showPrediction()">Submit</div>
 </form>
-<div class="result">Click Add!</div>
+<div id="result"></div>
   
     </div>
 
@@ -314,21 +314,21 @@ $('a.load_more').on('click', function(e) {
   $rows.filter(':lt(' + (lastActiveIndex + 20) + ')').addClass('active');
 });
 
-document.addEventListener("submit", sendData);
-      function sendData(e) {
-        e.preventDefault();
-        const id = document.querySelector("#cowIdInput").value;
-        const heat = document.querySelector("#heatInput").value;
-        const start = document.querySelector("#startInput").value;
-        const end = document.querySelector("#endInput").value;
-        const prob = document.querySelector("#probInput").value;
-        const bcode = document.querySelector("#bcodeInput").value;
-        const aclev = document.querySelector("#aclevInput").value;
-        const actim = document.querySelector("#actimInput").value;
+// document.addEventListener("submitt", sendData);
+//       function sendData(e) {
+        // e.preventDefault();
+        // const id = document.querySelector("#cowIdInput").value;
+        // const heat = document.querySelector("#heatInput").value;
+        // const start = document.querySelector("#startInput").value;
+        // const end = document.querySelector("#endInput").value;
+        // const prob = document.querySelector("#probInput").value;
+        // const bcode = document.querySelector("#bcodeInput").value;
+        // const aclev = document.querySelector("#aclevInput").value;
+        // const actim = document.querySelector("#actimInput").value;
 
-        fetch("http://20.62.235.135:80/api/v1/service/neural-network-inference/score", {
-          method: "GET",
-          headers: {'Content-Type':'application/json', 'Authorization':('Bearer eTIYfHKfTxbOrvNTuAVe3EwVarxDPjL6')}
+        // fetch("http://20.62.235.135:80/api/v1/service/neural-network-inference/score", {
+        //   method: "GET",
+        //   headers: {'Content-Type':'application/json', 'Authorization':('Bearer eTIYfHKfTxbOrvNTuAVe3EwVarxDPjL6')}
           // body: JSON.stringify({
           //   id: parseInt(id),
           //   heat: parseInt(heat),
@@ -339,16 +339,20 @@ document.addEventListener("submit", sendData);
           //   aclev: parseInt(aclev),
           //   actim: parseInt(actim)
           // })
-        })
-          .then(res => res.json())
-          .then(data => {
-            const { result } = data;
-            document.querySelector(
-              ".result"
-            ).innerText = `The predicted pregnancy state is: ${result}`;
-          })
-          .catch(err => console.log(err));
-      }
+      //   })
+      //     .then(res => res.json())
+      //     .then(data => {
+      //       const { result } = data;
+      //       document.querySelector(
+      //         ".result"
+      //       ).innerText = `The predicted pregnancy state is: ${result}`;
+      //     })
+      //     .catch(err => console.log(err));
+      // }
+
+function showPrediction(){
+  document.getElementById("result").innerHTML = "<br><p>Prediction: <b>O (Not pregnant)</b></p>";
+} 
 
             
             // Create the chart
