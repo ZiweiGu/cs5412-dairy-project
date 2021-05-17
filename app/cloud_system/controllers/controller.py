@@ -42,7 +42,7 @@ def get_sensor_data():
 	# query = "SELECT VALUE root FROM (SELECT SensorData.deviceID, SensorData.lie, MAX(SensorData.datetime) FROM SensorData GROUP BY SensorData.deviceID) as root"
 	results = db_client.FinalProjectDB.SensorData.aggregate([
 		{
-			"$sort": {"datetime": 1},
+			"$sort": {"datetime": -1},
 		},
 		{
 			"$group": {
