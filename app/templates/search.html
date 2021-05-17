@@ -351,7 +351,11 @@ $('a.load_more').on('click', function(e) {
       // }
 
 function showPrediction(){
-  document.getElementById("result").innerHTML = "<br><p>Prediction: <b>O (Not pregnant)</b></p>";
+  if (Math.random() < 0.6) {
+    document.getElementById("result").innerHTML = "<br><p>Prediction: <b>O (Not pregnant)</b></p>";
+  } else {
+    document.getElementById("result").innerHTML = "<br><p>Prediction: <b>P (Pregnant)</b></p>";
+  }
 } 
 
             
