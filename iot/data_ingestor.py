@@ -41,7 +41,10 @@ db_client = pymongo.MongoClient(DB_URI)
 # Define callbacks to process events
 def on_event_batch(partition_context, events):
     for event in events:
-        obj = json.loads(event.body_as_str())
+        obj = json.loads(event.body_as_str().replace("'", '"'))
+        obj['/deviceID'] = obj['DeviceId']
+        del obj['DeviceId']
+        print(obj)
         db_client.FinalProjectDB.SensorData.insert_one(obj)
         print("Inserted into DB")
     partition_context.update_checkpoint()
