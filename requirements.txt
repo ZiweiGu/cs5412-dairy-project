@@ -55,3 +55,4 @@ WTForms==2.2.1
 xlrd==2.0.1
 azure-cosmos==4.2.0
 pymongo
+flask_cors
