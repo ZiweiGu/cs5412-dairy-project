@@ -1,6 +1,8 @@
 # cs5412-dairy-project
 Estrus and Pregnancy Prediction CS 5412 Final Project
 
+Initial version of our web demo at https://cow-dashboard.herokuapp.com/
+
 ## The Problem We Are Solving
 (Cow) Estrus and pregnancy prediction based on the combination of behavioral and physiological features collected by automated sensors (Smartbow) with cow health, production, and reproductive performance data. Ultimately, we want to develop models to predict the outcome of an insemination using sensor and non-sensor data collected before insemination. 
 
